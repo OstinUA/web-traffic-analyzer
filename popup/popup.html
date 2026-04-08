@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Traffic-Stats</title>
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="header-main">
+          <img src="../icons/icon128.png" alt="" class="logo" />
+          <h1>Traffic-Stats</h1>
+        </div>
+        <button id="optionsBtn" class="opts-btn">⚙ Options</button>
+      </header>
+      <hr class="header-divider" />
+
+      <section id="optionsPanel" class="options-panel hidden">
+        <div class="options-grid">
+          <div>
+            <label for="baseUrl">Base URL</label>
+            <input id="baseUrl" type="text" placeholder="https://similarweb12.p.rapidapi.com" />
+          </div>
+          <div>
+            <label for="hostHeader">RapidAPI Host</label>
+            <input id="hostHeader" type="text" placeholder="similarweb12.p.rapidapi.com" />
+          </div>
+          <div>
+            <label for="epVisits">Visits endpoint</label>
+            <input id="epVisits" type="text" placeholder="/v1/website/visits?domain=" />
+          </div>
+          <div>
+            <label for="epGeo">Top Countries endpoint</label>
+            <input id="epGeo" type="text" placeholder="/v1/website/top-countries?domain=" />
+          </div>
+          <div>
+            <label for="apiKey">RapidAPI Key</label>
+            <input id="apiKey" type="text" placeholder="Your X-RapidAPI-Key" />
+          </div>
+        </div>
+        <label class="switch" for="useMock">
+          <input id="useMock" type="checkbox" />
+          <span>Switch Demo Mode</span>
+        </label>
+        <div class="options-actions">
+          <span id="saveStatus" class="save-status" aria-live="polite"></span>
+          <button class="save-btn" id="saveBtn">Save</button>
+        </div>
+      </section>
+
+      <div class="input-row">
+        <input id="domainInput" type="text" placeholder="Enter domain e.g. example.com or URL" />
+        <button id="analyzeBtn">Analyze</button>
+      </div>
+
+      <section id="results" class="card hidden">
+        <div id="status"></div>
+        <div class="grid">
+          <div class="panel">
+            <h2>Estimated Visits</h2>
+            <div id="visits"></div>
+          </div>
+          <div class="panel">
+            <h2>Top Countries</h2>
+            <ul id="countries"></ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="./popup.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+body {
+  width: 480px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 28px;
+  height: 28px;
+}
+
+.header-divider {
+  border: none;
+  border-top: 2px solid var(--accent);
+  margin: 10px 0 12px;
+}
+
+.opts-btn {
+  font-size: 12px;
+  padding: 4px 10px;
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.opts-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.options-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 10px;
+}
+
+.options-actions {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.save-btn {
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.input-row input {
+  flex: 1;
+}

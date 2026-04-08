@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Traffic-Stats Options</title>
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="./options.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="settings">
+        <h1>Traffic-Stats Settings</h1>
+        <p class="note">
+          Provide your <b>RapidAPI</b> key for a Similarweb-compatible API. If left empty,
+          Traffic-Stats runs in <b>Demo Mode</b> with mock data.
+        </p>
+
+        <div class="row">
+          <div>
+            <label for="baseUrl">Base URL</label>
+            <input id="baseUrl" type="text" placeholder="https://similarweb12.p.rapidapi.com" />
+          </div>
+          <div>
+            <label for="hostHeader">RapidAPI Host Header</label>
+            <input id="hostHeader" type="text" placeholder="similarweb12.p.rapidapi.com" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="epVisits">Visits Endpoint (suffix)</label>
+            <input id="epVisits" type="text" placeholder="/v1/website/visits?domain=" />
+          </div>
+          <div>
+            <label for="epGeo">Top Countries Endpoint (suffix)</label>
+            <input id="epGeo" type="text" placeholder="/v1/website/top-countries?domain=" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="apiKey">RapidAPI Key</label>
+            <input id="apiKey" type="text" placeholder="Your X-RapidAPI-Key" />
+          </div>
+        </div>
+
+        <div class="switch">
+          <input id="useMock" type="checkbox" />
+          <label for="useMock">Force Demo Mode (use mock data)</label>
+        </div>
+
+        <div class="actions">
+          <span id="saveStatus" class="save-status" aria-live="polite"></span>
+          <button class="save" id="saveBtn">Save Settings</button>
+        </div>
+
+        <p class="muted">Note: Endpoints differ by provider. Use the placeholders above as a starting point.</p>
+      </div>
+    </div>
+
+    <script src="./options.js" type="module"></script>
+  </body>
+</html>

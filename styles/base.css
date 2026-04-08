@@ -1,0 +1,172 @@
+:root {
+  --bg: #111111;
+  --surface: #1c1c1c;
+  --border: #444444;
+  --accent: #9a9a9a;
+  --accent-hover: #b0b0b0;
+  --text: #f2f2f2;
+  --text-muted: #bdbdbd;
+  --bar-bg: #3d3d3d;
+  --bar-fill: #8c8c8c;
+  --badge-bg: #252525;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--bg);
+}
+
+h1 {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+}
+
+h2 {
+  font-size: 14px;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+input[type='text'] {
+  width: 100%;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px;
+  font-size: 12px;
+}
+
+input[type='text']::placeholder {
+  color: var(--text-muted);
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  color: var(--text);
+}
+
+.switch input[type='checkbox'] {
+  accent-color: var(--accent);
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  background: var(--surface);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.panel {
+  background: var(--surface);
+}
+
+.save-status {
+  font-size: 12px;
+  color: var(--accent);
+  min-width: 62px;
+  text-align: right;
+}
+
+.input-row button,
+.save-btn {
+  padding: 8px 12px;
+  border: 0;
+  background: var(--accent);
+  color: var(--text);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.input-row button:hover,
+.save-btn:hover {
+  background: var(--accent-hover);
+}
+
+.hidden {
+  display: none !important;
+}
+
+#status {
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.big {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.code {
+  width: 34px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.fill {
+  flex: 1;
+  background: var(--bar-bg);
+  height: 8px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.bar {
+  display: block;
+  height: 8px;
+  background: var(--bar-fill);
+}
+
+.val {
+  font-variant-numeric: tabular-nums;
+  min-width: 48px;
+  text-align: right;
+  color: var(--text-muted);
+}

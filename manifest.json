@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Web Traffic Analyzer & Geo Stats Tool",
+  "description": "Estimate website traffic and top countries instantly. Uses Similarweb-like APIs via RapidAPI for accurate domain insights",
+  "version": "2.1.0",
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Traffic-Stats",
+    "default_popup": "popup/popup.html"
+  },
+  "options_page": "options/options.html",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://*.rapidapi.com/*",
+    "https://*.similarweb.com/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  }
+}
