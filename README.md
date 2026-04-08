@@ -1,5 +1,3 @@
-## 1. Title and Description
-
 # Traffic Stats Analyzer Logging Library
 
 A provider-agnostic JavaScript logging and traffic-observability library for Chrome extensions that normalizes domain telemetry, enriches API responses, and guarantees resilient fallback behavior.
@@ -12,21 +10,20 @@ A provider-agnostic JavaScript logging and traffic-observability library for Chr
 > [!NOTE]
 > This library is currently shipped as a Chrome Manifest V3 extension package and can be consumed as a modular logging/analytics runtime in extension-based architectures.
 
-## 2. Table of Contents
+## Table of Contents
 
-- [1. Title and Description](#1-title-and-description)
-- [2. Table of Contents](#2-table-of-contents)
-- [3. Features](#3-features)
-- [4. Tech Stack & Architecture](#4-tech-stack--architecture)
-- [5. Getting Started](#5-getting-started)
-- [6. Testing](#6-testing)
-- [7. Deployment](#7-deployment)
-- [8. Usage](#8-usage)
-- [9. Configuration](#9-configuration)
-- [10. License](#10-license)
+- [Table of Contents](#table-of-contents)
+- [Features](#features)
+- [Tech Stack & Architecture](#tech-stack--architecture)
+- [Getting Started](#getting-started)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [License](#license)
 - [Support the Project](#support-the-project)
 
-## 3. Features
+## Features
 
 - Structured, provider-driven logging pipeline with configurable `baseUrl`, endpoints, and auth headers.
 - Domain canonicalization primitives (`normalizeDomain`, `getHostFromUrl`) to prevent malformed telemetry dimensions.
@@ -44,7 +41,7 @@ A provider-agnostic JavaScript logging and traffic-observability library for Chr
 > [!IMPORTANT]
 > The fallback-first design ensures logs and traffic insights remain available even during provider outages or misconfiguration.
 
-## 4. Tech Stack & Architecture
+## Tech Stack & Architecture
 
 ### Core Stack
 
@@ -114,7 +111,7 @@ flowchart LR
 > [!TIP]
 > When adding additional providers, preserve envelope contracts first and adapt provider fields second.
 
-## 5. Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -144,7 +141,7 @@ cd Traffic-Stats-Analyzer
 > [!WARNING]
 > Never hardcode production API keys in source files. Use runtime options storage only.
 
-## 6. Testing
+## Testing
 
 This repository currently has no committed automated unit/integration test suite, so validation is done via linting and deterministic manual checks.
 
@@ -173,7 +170,7 @@ npm run test:integration
 > [!CAUTION]
 > A green manual run does not guarantee provider contract compatibility across all third-party API versions.
 
-## 7. Deployment
+## Deployment
 
 ### Production Readiness Checklist
 
@@ -209,7 +206,7 @@ jobs:
       - run: zip -r traffic-stats-analyzer.zip . -x '.git/*'
 ```
 
-## 8. Usage
+## Usage
 
 ### Initialize and Trigger Analysis
 
@@ -242,7 +239,7 @@ const d2 = getHostFromUrl('https://news.example.com/path'); // news.example.com
 console.log(d1, d2);
 ```
 
-## 9. Configuration
+## Configuration
 
 ### Storage-Backed Configuration Model
 
@@ -282,7 +279,7 @@ This project does not currently ship with `.env` ingestion or CLI startup flags.
 
 If desired, CI environments can inject provider defaults by generating a patched `shared/constants.js` during build-time release workflows.
 
-## 10. License
+## License
 
 Licensed under the Apache License 2.0. See [LICENSE](LICENSE) for full legal terms.
 
