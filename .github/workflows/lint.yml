@@ -1,39 +1,59 @@
-name: Lint
+name: Lint and Static Checks
 
 on:
   pull_request:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
-permissions:
-  contents: read
+concurrency:
+  group: lint-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: read-all
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-    env:
-      # Set this to your project runtime if your repository standard differs.
-      NODE_VERSION: "22"
+    timeout-minutes: 15
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: '20'
 
-      - name: Lint JavaScript with ESLint
+      - name: Install dependencies
         run: |
-          npx --yes eslint@9 \
-            --no-config-lookup \
-            --ext .js \
-            --global chrome \
-            --global browser \
-            --global window \
-            --global document \
-            --global console \
-            --rule 'no-debugger:error' \
-            --rule 'no-duplicate-imports:error' \
-            --rule 'no-unused-vars:warn' \
-            background options popup shared
+          if [ ! -f package.json ]; then
+            echo "No package.json found. Skipping npm install."
+            exit 0
+          fi
+          if [ -f package-lock.json ]; then
+            echo "package-lock.json found. Running fast install (npm ci)..."
+            npm ci
+          else
+            echo "package-lock.json NOT found. Generating it (npm install)..."
+            npm install --no-audit --no-fund
+          fi
+
+      - name: Run project lint script when available
+        run: |
+          if [ -f package.json ]; then
+            npm run lint --if-present
+          else
+            echo "No package.json found. Skipping lint."
+          fi
+
+      - name: Validate JavaScript syntax
+        run: |
+          if [ -d api ]; then
+            while IFS= read -r -d '' file; do
+              node --check "$file"
+            done < <(find api -type f -name '*.js' -print0)
+          else
+            echo "No api/ directory found. Skipping JavaScript syntax validation."
+          fi

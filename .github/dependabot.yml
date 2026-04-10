@@ -1,16 +1,17 @@
 version: 2
 updates:
-  - package-ecosystem: github-actions
+  - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: weekly
-      day: monday
-      time: "06:00"
-      timezone: "Etc/UTC"
-    open-pull-requests-limit: 10
+      interval: "weekly"
     labels:
-      - dependencies
-      - github-actions
-    commit-message:
-      prefix: "chore(deps)"
-      include: scope
+      - "dependencies"
+      - "python"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+      - "actions"

@@ -1,20 +1,23 @@
 name: Dependabot Auto Merge
 
 on:
-  pull_request_target:
-    types: [opened, synchronize, reopened, ready_for_review]
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
 
-permissions:
-  contents: write
-  pull-requests: write
+permissions: read-all
+
+concurrency:
+  group: dependabot-merge-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
 
 jobs:
-  auto-approve-and-merge:
-    if: >-
-      github.actor == 'dependabot[bot]' &&
-      github.event.pull_request.user.login == 'dependabot[bot]' &&
-      github.event.pull_request.draft == false
+  automerge:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
       - name: Fetch Dependabot metadata
@@ -23,24 +26,20 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Auto-approve patch and minor updates
-        if: >-
-          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
-          steps.metadata.outputs.update-type == 'version-update:semver-minor'
+      - name: Approve safe non-breaking updates
+        if: |
+          github.event.pull_request.draft == false &&
+          (steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+           steps.metadata.outputs.update-type == 'version-update:semver-minor')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # PR_URL comes from the pull request event payload.
-          PR_URL: ${{ github.event.pull_request.html_url }}
-        run: |
-          gh pr review "$PR_URL" --approve --body "Auto-approved non-breaking dependency update."
+        run: gh pr review "${{ github.event.pull_request.number }}" --approve
 
-      - name: Enable auto-merge for patch and minor updates
-        if: >-
-          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
-          steps.metadata.outputs.update-type == 'version-update:semver-minor'
+      - name: Enable auto-merge for safe non-breaking updates
+        if: |
+          github.event.pull_request.draft == false &&
+          (steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+           steps.metadata.outputs.update-type == 'version-update:semver-minor')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # PR_URL comes from the pull request event payload.
-          PR_URL: ${{ github.event.pull_request.html_url }}
-        run: |
-          gh pr merge "$PR_URL" --auto --squash --delete-branch
+        run: gh pr merge "${{ github.event.pull_request.number }}" --auto --merge
